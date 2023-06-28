@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EDBA5EE02A4C8155001E86B6 /* SearchResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBA5EDF2A4C8155001E86B6 /* SearchResultTableViewCell.swift */; };
 		EDD756922A4C48300022A609 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD756912A4C48300022A609 /* AppDelegate.swift */; };
 		EDD756942A4C48300022A609 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD756932A4C48300022A609 /* SceneDelegate.swift */; };
 		EDD7569B2A4C48350022A609 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDD7569A2A4C48350022A609 /* Assets.xcassets */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EDBA5EDF2A4C8155001E86B6 /* SearchResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewCell.swift; sourceTree = "<group>"; };
 		EDD7568E2A4C48300022A609 /* Stocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stocks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDD756912A4C48300022A609 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EDD756932A4C48300022A609 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				EDD7569C2A4C48350022A609 /* LaunchScreen.storyboard */,
+				EDBA5EDF2A4C8155001E86B6 /* SearchResultTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -196,6 +199,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDD756B72A4C4D5A0022A609 /* HapticsManager.swift in Sources */,
+				EDBA5EE02A4C8155001E86B6 /* SearchResultTableViewCell.swift in Sources */,
 				EDD756AB2A4C49F50022A609 /* WatchListVC.swift in Sources */,
 				EDD756AD2A4C4A130022A609 /* TopStoriesNewsVC.swift in Sources */,
 				EDD756AF2A4C4A290022A609 /* SearchResultsVC.swift in Sources */,
