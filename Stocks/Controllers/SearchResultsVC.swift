@@ -1,6 +1,12 @@
 import UIKit
 
+protocol SearchResultsVCDelegate: AnyObject {
+    func searchResultsVCDidSelect(searchResult: String)
+}
+
 class SearchResultsVC: UIViewController {
+    
+    weak var delegate: SearchResultsVCDelegate?
     
     private let tableView: UITableView = {
         let table = UITableView()
@@ -42,6 +48,11 @@ extension SearchResultsVC: UITableViewDelegate, UITableViewDataSource {
         cell.detailTextLabel?.text = "Apple"
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        delegate?.searchResultsVCDidSelect(searchResult: "SPP")
     }
     
 }
