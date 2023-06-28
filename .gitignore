@@ -3,3 +3,4 @@
 /*.xcodeproj
 xcuserdata/
 project.xcworkspace
+**/UserInterfaceState.xcuserstate
