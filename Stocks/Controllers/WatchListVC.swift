@@ -1,10 +1,3 @@
-//
-//  WatchListVC.swift
-//  Stocks
-//
-//  Created by Merusha on 28.06.2023.
-//
-
 import UIKit
 
 class WatchListVC: UIViewController {
@@ -12,18 +5,26 @@ class WatchListVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .green
+        view.backgroundColor = .systemBackground
+        setUpSearchResultsVC()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func setUpSearchResultsVC() {
+        let resultVC = SearchResultsVC()
+        let searchVC = UISearchController(searchResultsController: resultVC)
+        searchVC.searchResultsUpdater = self
+        navigationItem.searchController = searchVC
     }
-    */
+}
 
+extension WatchListVC: UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let query = searchController.searchBar.text,
+              let resultVC = searchController.searchResultsUpdater as? SearchResultsVC,
+              !query.trimmingCharacters(in: .whitespaces).isEmpty else {
+            return
+        }
+        print(query)
+    }
 }
