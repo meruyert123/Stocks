@@ -57,7 +57,9 @@ extension WatchListVC: UISearchResultsUpdating {
               !query.trimmingCharacters(in: .whitespaces).isEmpty else {
             return
         }
-        print(query)
+        
+        // Update results controllers
+        resultVC.update(with: ["qwe"])
     }
 }
 

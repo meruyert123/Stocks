@@ -7,6 +7,7 @@ protocol SearchResultsVCDelegate: AnyObject {
 class SearchResultsVC: UIViewController {
     
     weak var delegate: SearchResultsVCDelegate?
+    private var results: [String] = []
     
     private let tableView: UITableView = {
         let table = UITableView()
@@ -31,6 +32,11 @@ class SearchResultsVC: UIViewController {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    public func update(with results: [String]) {
+        self.results = results
+        tableView.reloadData()
     }
     
 }
