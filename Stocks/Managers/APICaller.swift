@@ -17,11 +17,16 @@ final class APICaller {
         query: String,
         completion: @escaping(Result<SearchResponce, Error>) -> Void
     ) {
+        guard let safeQuery = query.addingPercentEncoding(
+            withAllowedCharacters: .urlQueryAllowed
+        ) else {
+            return
+        }
         
         request(
             url: url(
                 for: .search,
-                queryParams: ["q": query]
+                queryParams: ["q": safeQuery]
             ),
             expecting: SearchResponce.self,
             completion: completion

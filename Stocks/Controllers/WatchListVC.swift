@@ -75,6 +75,9 @@ extension WatchListVC: UISearchResultsUpdating {
                         resultVC.update(with: response.result)
                     }
                 case .failure(let error):
+                    DispatchQueue.main.async {
+                        resultVC.update(with: [])
+                    }
                     print(error)
                 }
             }

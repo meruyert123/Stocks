@@ -14,6 +14,8 @@ class SearchResultsVC: UIViewController {
         // Register cell
         table.register(SearchResultTableViewCell.self,
                        forCellReuseIdentifier: SearchResultTableViewCell.identifier)
+        
+        table.isHidden = true
         return table
     }()
 
@@ -36,6 +38,7 @@ class SearchResultsVC: UIViewController {
     
     public func update(with results: [SearchResult]) {
         self.results = results
+        tableView.isHidden = results.isEmpty
         tableView.reloadData()
     }
     
