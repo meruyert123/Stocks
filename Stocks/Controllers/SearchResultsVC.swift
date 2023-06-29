@@ -1,13 +1,13 @@
 import UIKit
 
 protocol SearchResultsVCDelegate: AnyObject {
-    func searchResultsVCDidSelect(searchResult: String)
+    func searchResultsVCDidSelect(searchResult: SearchResult)
 }
 
 class SearchResultsVC: UIViewController {
     
     weak var delegate: SearchResultsVCDelegate?
-    private var results: [String] = []
+    private var results: [SearchResult] = []
     
     private let tableView: UITableView = {
         let table = UITableView()
@@ -34,7 +34,7 @@ class SearchResultsVC: UIViewController {
         tableView.dataSource = self
     }
     
-    public func update(with results: [String]) {
+    public func update(with results: [SearchResult]) {
         self.results = results
         tableView.reloadData()
     }
@@ -44,21 +44,22 @@ class SearchResultsVC: UIViewController {
 extension SearchResultsVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 8
+        return results.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchResultTableViewCell.identifier, for: indexPath)
         
-        cell.textLabel?.text = "AAPL"
-        cell.detailTextLabel?.text = "Apple"
+        cell.textLabel?.text = results[indexPath.row].displaySymbol
+        cell.detailTextLabel?.text = results[indexPath.row].description
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        delegate?.searchResultsVCDidSelect(searchResult: "SPP")
+        let model = results[indexPath.row]
+        delegate?.searchResultsVCDidSelect(searchResult: model)
     }
     
 }

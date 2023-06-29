@@ -4,7 +4,7 @@ final class APICaller {
     static let shared = APICaller()
     
     private struct Constants {
-        static let apiKey = "ciehpr1r01qmfas4dib0ciehpr1r01qmfas4dibg"
+        static let apiKey = "cieiu9hr01qmfas4e5ugcieiu9hr01qmfas4e5v0"
         static let sandboxApiKey = ""
         static let baseUrl = "https://finnhub.io/api/v1/"
     }
@@ -15,14 +15,17 @@ final class APICaller {
     
     public func search(
         query: String,
-        completion: @escaping(Result<[String], Error>) -> Void
+        completion: @escaping(Result<SearchResponce, Error>) -> Void
     ) {
-        guard let url = url(
-            for: .search,
-            queryParams: ["q": query]
-        ) else {
-            return
-        }
+        
+        request(
+            url: url(
+                for: .search,
+                queryParams: ["q": query]
+            ),
+            expecting: SearchResponce.self,
+            completion: completion
+        )
                 
     }
     
@@ -59,7 +62,8 @@ final class APICaller {
         urlString = urlString + "?" + queryString
         
         print(urlString)
-        return URL(string: queryString)
+        print()
+        return URL(string: urlString)
     }
     
     private func request<T: Codable>(

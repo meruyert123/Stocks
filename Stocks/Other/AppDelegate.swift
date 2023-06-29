@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  Stocks
-//
-//  Created by Merusha on 28.06.2023.
-//
-
 import UIKit
 
 @main
@@ -14,10 +7,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
-        APICaller.shared.search(query: "Apple") { _ in
-            
-        }
+//        APICaller.shared.search(query: "fac") { result in
+//            switch result {
+//            case .success(let response):
+//                print(response)
+////                DispatchQueue.main.async {
+////                    resultVC.update(with: response.result)
+////                    print(response.result)
+////                }
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
         return true
     }
 
@@ -38,3 +39,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+// https://finnhub.io/api/v1/search?q=apple&token=ciehpr1r01qmfas4dib0ciehpr1r01qmfas4dibg
+// https://finnhub.io/api/v1/search?q=Apple&token=ciehpr1r01qmfas4dib0ciehpr1r01qmfas4dibg

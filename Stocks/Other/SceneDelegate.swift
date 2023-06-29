@@ -1,10 +1,3 @@
-//
-//  SceneDelegate.swift
-//  Stocks
-//
-//  Created by Merusha on 28.06.2023.
-//
-
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {

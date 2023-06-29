@@ -10,6 +10,7 @@ class WatchListVC: UIViewController {
         view.backgroundColor = .systemBackground
         setupTitleView()
         setUpSearchResultsVC()
+        
     }
     
     // MARK: - Private
@@ -55,18 +56,32 @@ extension WatchListVC: UISearchResultsUpdating {
         guard let query = searchController.searchBar.text,
               let resultVC = searchController.searchResultsUpdater as? SearchResultsVC,
               !query.trimmingCharacters(in: .whitespaces).isEmpty else {
+            print("r")
             return
         }
+        print(query)
+        // Call API to search
+//        APICaller.shared.search(query: "app") { result in
+//            switch result {
+//            case .success(let response):
+//                print(response)
+////                DispatchQueue.main.async {
+////                    resultVC.update(with: response.result)
+////                    print(response.result)
+////                }
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
         
         // Update results controllers
-        resultVC.update(with: ["qwe"])
     }
 }
 
 extension WatchListVC: SearchResultsVCDelegate {
     
-    func searchResultsVCDidSelect(searchResult: String) {
-        
+    func searchResultsVCDidSelect(searchResult: SearchResult) {
+        print("Did select: \(searchResult)")
     }
 
 }
