@@ -2,6 +2,8 @@ import UIKit
 
 class WatchListVC: UIViewController {
     
+    private var searchTimer: Timer?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -59,20 +61,24 @@ extension WatchListVC: UISearchResultsUpdating {
         else {
             return
         }
-
-        // Call API to search
-        APICaller.shared.search(query: query) { result in
-            switch result {
-            case .success(let response):
-                DispatchQueue.main.async {
-                    resultVC.update(with: response.result)
+        
+        // Reset timer
+        searchTimer?.invalidate()
+        
+        // Optimize to reduce number of searches for when user stops typing
+        searchTimer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { _ in
+            // Call API to search
+            APICaller.shared.search(query: query) { result in
+                switch result {
+                case .success(let response):
+                    DispatchQueue.main.async {
+                        resultVC.update(with: response.result)
+                    }
+                case .failure(let error):
+                    print(error)
                 }
-            case .failure(let error):
-                print(error)
             }
         }
-        
-        // Update results controllers
     }
 }
 
@@ -81,5 +87,5 @@ extension WatchListVC: SearchResultsVCDelegate {
     func searchResultsVCDidSelect(searchResult: SearchResult) {
         print("Did select: \(searchResult)")
     }
-
+    
 }
