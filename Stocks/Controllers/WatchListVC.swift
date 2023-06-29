@@ -54,25 +54,23 @@ extension WatchListVC: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
         guard let query = searchController.searchBar.text,
-              let resultVC = searchController.searchResultsUpdater as? SearchResultsVC,
-              !query.trimmingCharacters(in: .whitespaces).isEmpty else {
-            print("r")
+              let resultVC = searchController.searchResultsController as? SearchResultsVC,
+              !query.trimmingCharacters(in: .whitespaces).isEmpty
+        else {
             return
         }
-        print(query)
+
         // Call API to search
-//        APICaller.shared.search(query: "app") { result in
-//            switch result {
-//            case .success(let response):
-//                print(response)
-////                DispatchQueue.main.async {
-////                    resultVC.update(with: response.result)
-////                    print(response.result)
-////                }
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
+        APICaller.shared.search(query: query) { result in
+            switch result {
+            case .success(let response):
+                DispatchQueue.main.async {
+                    resultVC.update(with: response.result)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
         
         // Update results controllers
     }
