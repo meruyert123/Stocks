@@ -1,6 +1,17 @@
 import Foundation
 import UIKit
 
+// MARK: Date formatter
+
+extension DateFormatter {
+    static let newsDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        
+        formatter.dateFormat = "YYYY-MM-dd"
+        return formatter
+    }()
+}
+
 // MARK: - Add subview
 
 extension UIView {
