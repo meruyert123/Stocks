@@ -1,8 +1,10 @@
 import UIKit
+import FloatingPanel
 
 class WatchListVC: UIViewController {
     
     private var searchTimer: Timer?
+    private var panel: FloatingPanelController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -12,10 +14,21 @@ class WatchListVC: UIViewController {
         view.backgroundColor = .systemBackground
         setupTitleView()
         setUpSearchResultsVC()
-        
+        setUpFloatingPanel()
     }
     
     // MARK: - Private
+    
+    private func setUpFloatingPanel() {
+        let vc = TopStoriesNewsVC()
+        let panel = FloatingPanelController()
+        
+        panel.surfaceView.backgroundColor = .secondarySystemBackground
+        panel.set(contentViewController: vc)
+        
+        panel.addPanel(toParent: self)
+    }
+    
     private func setupTitleView() {
         
         let titleView = UIView(
