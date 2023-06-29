@@ -1,17 +1,6 @@
 import UIKit
 
 class NewVC: UIViewController {
-
-    let tableView: UITableView = {
-        let table = UITableView()
-        
-        // Register cell, header
-        
-        table.backgroundColor = .clear
-        return table
-    }()
-    
-    private let type: Type
     
     enum `Type` {
         case topStories
@@ -26,6 +15,23 @@ class NewVC: UIViewController {
             }
         }
     }
+    
+    // MARK: - Properties
+    
+    private var stories = [String]()
+     
+    private let type: Type
+
+    let tableView: UITableView = {
+        let table = UITableView()
+        
+        // Register cell, header
+        table.register(NewsHeaderView.self,
+                       forHeaderFooterViewReuseIdentifier: NewsHeaderView.identfier)
+        
+        table.backgroundColor = .clear
+        return table
+    }()
     
     // MARK: - Init
     
@@ -79,7 +85,12 @@ extension NewVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return nil
+        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: NewsHeaderView.identfier) as? NewsHeaderView else {
+            return nil
+        }
+        header.configure(with: .init(title: self.type.title, shouldShowAddButton: true))
+        
+        return header
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -87,7 +98,7 @@ extension NewVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 70
+        return NewsHeaderView.preferredHeight
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
