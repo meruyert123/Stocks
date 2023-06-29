@@ -1,13 +1,50 @@
 import Foundation
 import UIKit
 
-// MARK: Date formatter
+extension UIImageView {
+    func setImage(with url: URL?) {
+        guard let url = url else {
+            return
+        }
+        
+        DispatchQueue.global(qos: .userInteractive).async {
+            let task = URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
+                guard let data = data, error == nil else {
+                    return
+                }
+                DispatchQueue.main.async {
+                    self?.image = UIImage(data: data)
+                }
+            }
+            task.resume()
+        }
+    }
+}
+
+// MARK: - String
+
+extension String {
+    static func string(fromTimeInterval timeInterval: TimeInterval) -> String {
+        let date = Date(timeIntervalSince1970: timeInterval)
+        
+        return DateFormatter.dayMonthYearDateFormatter.string(from: date)
+    }
+}
+
+// MARK: - Date formatter
 
 extension DateFormatter {
     static let newsDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         
         formatter.dateFormat = "YYYY-MM-dd"
+        return formatter
+    }()
+    
+    static let dayMonthYearDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        
+        formatter.dateStyle = .medium
         return formatter
     }()
 }

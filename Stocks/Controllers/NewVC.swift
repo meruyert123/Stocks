@@ -18,7 +18,16 @@ class NewVC: UIViewController {
     
     // MARK: - Properties
     
-    private var stories = [String]()
+    private var stories: [NewsStory] = [
+        NewsStory(category: "category",
+                  datetime: 12345,
+                  headline: "headlineheadlineheadlineheadlineheadline",
+                  image: "headlineheadlineheadlineheadlineheadline",
+                  related: "relaheadlineheadlineheadlineheadlineheadlineted",
+                  source: "souheadlineheadlineheadlineheadlineheadlinerce",
+                  summary: "sumheadlineheadlineheadlineheadlineheadlinemary",
+                  url: "headlineheadlineheadlineheadlineheadline")
+    ]
      
     private let type: Type
 
@@ -26,6 +35,10 @@ class NewVC: UIViewController {
         let table = UITableView()
         
         // Register cell, header
+        
+        table.register(NewsStoryTableViewCell.self,
+                       forCellReuseIdentifier: NewsStoryTableViewCell.identifier)
+        
         table.register(NewsHeaderView.self,
                        forHeaderFooterViewReuseIdentifier: NewsHeaderView.identfier)
         
@@ -77,10 +90,17 @@ class NewVC: UIViewController {
 extension NewVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return stories.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: NewsStoryTableViewCell.identifier, for: indexPath) as? NewsStoryTableViewCell else {
+            fatalError()
+        }
+        
+        cell.configure(with: .init(model: stories[indexPath.row]))
+        
         return UITableViewCell()
     }
     
@@ -94,7 +114,7 @@ extension NewVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 140
+        return NewsStoryTableViewCell.preferredHeight
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -103,5 +123,7 @@ extension NewVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        // Opens new story
     }
 }
