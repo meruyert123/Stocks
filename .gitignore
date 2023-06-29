@@ -4,3 +4,6 @@
 xcuserdata/
 project.xcworkspace
 **/UserInterfaceState.xcuserstate
+DerivedData/ 
+*.pbxuser
+
