@@ -1,6 +1,6 @@
 import UIKit
 
-class TopStoriesNewsVC: UIViewController {
+class NewVC: UIViewController {
 
     let tableView = UITableView()
     
