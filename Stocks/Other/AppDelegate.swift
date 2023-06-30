@@ -27,14 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func debug() {
-        APICaller.shared.news(for: .company(symbol: "MSFT")) { reslut in
-            switch reslut {
-            case .success(let news):
-                print(news.count)
-            case .failure(let error):
-                print(error)
-            }
-        }
+        
     }
 
 }
