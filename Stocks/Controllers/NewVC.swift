@@ -18,16 +18,7 @@ class NewVC: UIViewController {
     
     // MARK: - Properties
     
-    private var stories: [NewsStory] = [
-        NewsStory(category: "category",
-                  datetime: 12345,
-                  headline: "headlineheadlineheadlineheadlineheadline",
-                  image: "headlineheadlineheadlineheadlineheadline",
-                  related: "relaheadlineheadlineheadlineheadlineheadlineted",
-                  source: "souheadlineheadlineheadlineheadlineheadlinerce",
-                  summary: "sumheadlineheadlineheadlineheadlineheadlinemary",
-                  url: "headlineheadlineheadlineheadlineheadline")
-    ]
+    private var stories = [NewsStory]()
      
     private let type: Type
 
@@ -79,7 +70,20 @@ class NewVC: UIViewController {
     }
     
     private func fetchNews() {
-        
+        APICaller.shared.news(for: type) { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let stories):
+                DispatchQueue.main.async {
+                    self.stories = stories
+                    self.tableView.reloadData()
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
     private func open(url: URL) {
