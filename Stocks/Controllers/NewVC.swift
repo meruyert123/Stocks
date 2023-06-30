@@ -104,12 +104,9 @@ extension NewVC: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: NewsStoryTableViewCell.identifier, for: indexPath) as? NewsStoryTableViewCell else {
             fatalError()
         }
-        
         cell.configure(with: .init(model: stories[indexPath.row]))
-        cell.backgroundColor = .clear
-        cell.isOpaque = false
         
-        return UITableViewCell()
+        return cell
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
